@@ -1,0 +1,2 @@
+class Fanpage < ApplicationRecord
+end

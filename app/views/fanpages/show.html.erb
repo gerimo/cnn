@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fanpage.name %>
+</p>
+
+<p>
+  <strong>Facebook number:</strong>
+  <%= @fanpage.facebook_number %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @fanpage.category_id %>
+</p>
+
+<%= link_to 'Edit', edit_fanpage_path(@fanpage) %> |
+<%= link_to 'Back', fanpages_path %>
