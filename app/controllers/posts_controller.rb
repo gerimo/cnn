@@ -4,7 +4,29 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 20)
+    if params[:date_from].present? && params[:date_end].present? && params[:category_id].present?
+      @fanpages = Fanpage.where(category_id: params[:category_id])
+      datef = Date.parse params[:date_from]
+      datee = Date.parse params[:date_end]
+      @posts = Post.where("created_at > ?", datef).where("created_at < ?", datee).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+    elsif params[:date_from].present? && params[:category_id].present?
+      @fanpages = Fanpage.where(category_id: params[:category_id])
+      datef = Date.parse params[:date_from]
+      @posts = Post.where("created_at > ?", datef).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+    elsif params[:date_end].present? && params[:category_id].present?
+      @fanpages = Fanpage.where(category_id: params[:category_id])
+      datee = Date.parse params[:date_end]
+      @posts = Post.where("created_at < ?", datee).where("created_at < ?", datee).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+    elsif params[:date_from].present? && params[:date_end].present?
+      datef = Date.parse params[:date_from]
+      datee = Date.parse params[:date_end]
+      @posts = Post.where("created_at > ?", datef).where("created_at < ?", datee).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+    elsif params[:category_id].present?
+      @fanpages = Fanpage.where(category_id: params[:category_id])
+      @posts = Post.where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+    else
+     @posts = Post.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+    end
   end
 
   # GET /posts/1
@@ -69,7 +91,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:facebook_id, :content, :share_count, :like_count, :comment_count)
+      params.require(:post).permit(:facebook_id, :content, :share_count, :like_count, :comment_count,:fanpage_id)
     end
 
     def sort_column
@@ -77,6 +99,6 @@ class PostsController < ApplicationController
     end
   
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

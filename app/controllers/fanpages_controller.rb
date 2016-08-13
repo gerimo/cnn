@@ -8,6 +8,12 @@ class FanpagesController < ApplicationController
     @fanpages = Fanpage.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 20)
   end
 
+  def home
+    @categorys = Category.all
+  end
+  def search
+    
+  end
   # GET /fanpages/1
   # GET /fanpages/1.json
   def show

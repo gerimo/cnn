@@ -1,0 +1,37 @@
+<div class="homepage">
+	<h1>Search for your Competitors Facebook Post </h1>
+
+	<p>Sort posts from different Fan Page regarding their number LIKES SHARES or COMMENTS </p>
+	<%= form_tag posts_path,method: 'get' do |f| %>
+		<div class="form-choose">
+			<div class="date-choose col-xs-12">
+				<div class="row">
+					<div class="form-group date-from col-xs-5 datepicker">
+			  		<input name="date_from" class ="form-control from" />
+					</div>
+					<div class="form-group date-end col-xs-5 datepicker">
+			  		<input name="date_end" class ="form-control to" />
+					</div>	
+				</div>
+			</div>
+
+			<div class="category-choose col-xs-12">
+				<div class="form-group col-xs-4 pd-left">
+			    <label for="sel1">Select Category:</label>
+			    <%= select_tag "category_id", options_for_select(@categorys.collect{ |u| [u.name, u.id]}) ,class: "form-control", id: "sel1" %>
+			  </div>
+			</div>
+			<div class="sort-by col-xs-12">
+				<div class="form-group col-xs-4 pd-left">
+			    <label for="sel1">Select Category:</label>
+			    <select id="sort" name="sort" class="form-control">
+					  <option value="like_count">Most Likes</option>
+					  <option value="share_count">Most Shares</option>
+					  <option value="comment_count">Most Comments</option>
+					</select>
+			  </div>
+			</div>
+			<%= submit_tag "Submit", class: "btn btn-primary mg-left"%>
+		</div>
+	<% end %>
+</div>
