@@ -1,10 +1,11 @@
 class FanpagesController < ApplicationController
   before_action :set_fanpage, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /fanpages
   # GET /fanpages.json
   def index
-    @fanpages = Fanpage.all
+    @fanpages = Fanpage.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /fanpages/1
@@ -70,5 +71,12 @@ class FanpagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def fanpage_params
       params.require(:fanpage).permit(:name, :facebook_number, :category_id)
+    end
+     def sort_column
+      Fanpage.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

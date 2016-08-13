@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /posts/1
@@ -70,5 +70,13 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:facebook_id, :content, :share_count, :like_count, :comment_count)
+    end
+
+    def sort_column
+      Post.column_names.include?(params[:sort]) ? params[:sort] : "content"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

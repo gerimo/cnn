@@ -1,18 +1,16 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Posts</h1>
-
 <table class="table table-striped post-table">
   <thead>
-    <tr>
-      <th data-sort = "string"> Facebook </th>
-      <th data-sort = "string"> Content </th>
-      <th data-sort = "int"> Share count </th>
-      <th data-sort = "int"> Like count</th>
-      <th data-sort = "int">Comment count</th>
+    <tr class="header">
+      <th><%= sortable "facebook_id" %></th>
+      <th><%= sortable "content" %></th>
+      <th><%= sortable "share_count" %></th>
+      <th><%= sortable "like_count" %></th>
+      <th><%= sortable "comment_count" %> </th>
+      <th><%= sortable "created_at" %> </th>
     </tr>
   </thead>
-
   <tbody>
     <% @posts.each do |post| %>
       <tr>
@@ -21,11 +19,12 @@
         <td><%= post.share_count %></td>
         <td><%= post.like_count %></td>
         <td><%= post.comment_count %></td>
+        <td><%= post.created_at %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @posts , renderer: BootstrapPagination::Rails  %>
 <br>
 
 <%= link_to 'New Post', new_post_path %>
