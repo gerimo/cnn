@@ -2,5 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .post-table{
-	
+	.header{
+		th{
+			a{
+				color: #666;
+			}
+			a:hover{
+				color: #666;
+				text-decoration: none;
+				background: none;
+			}
+		}
+	}
 }
