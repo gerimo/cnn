@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811061722) do
+ActiveRecord::Schema.define(version: 20160813064720) do
 
   create_table "fanpages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -20,4 +20,17 @@ ActiveRecord::Schema.define(version: 20160811061722) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "facebook_id"
+    t.string   "content"
+    t.integer  "share_count"
+    t.integer  "like_count"
+    t.integer  "comment_count"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "fanpage_id"
+    t.index ["fanpage_id"], name: "index_posts_on_fanpage_id", using: :btree
+  end
+
+  add_foreign_key "posts", "fanpages"
 end
