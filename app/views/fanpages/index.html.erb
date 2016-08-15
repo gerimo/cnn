@@ -14,7 +14,7 @@
       <tr>
         <td><%= fanpage.name %></td>
         <td><%= fanpage.facebook_number %></td>
-        <td><%= fanpage.category_id %></td>
+        <td><%= fanpage.category.try(:name) %></td>
         <td><%= fanpage.created_at %></td>
       </tr>
     <% end %>
