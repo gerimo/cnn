@@ -3,9 +3,11 @@ class CreateFanpages < ActiveRecord::Migration[5.0]
     create_table :fanpages do |t|
       t.string :name
       t.string :facebook_number
-      t.integer :category_id
+      t.references :category, index: true
 
       t.timestamps
     end
+
+    add_foreign_key :fanpages, :categories
   end
 end

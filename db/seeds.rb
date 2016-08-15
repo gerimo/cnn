@@ -6,25 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do
-	name = Faker::Lorem.sentence(5)
+Category.destroy_all
+Fanpage.destroy_all
+
+%w[sports magazine music game].each do |name|
 	category = Category.create(name: name)
 end
-	categorys = Category.all
-10.times do
-	name = Faker::Lorem.sentence(20)
-	facebook_number = Faker::Number.number(4)
-	categorys.each{ |category| category.fanpages.create(name: name, facebook_number: facebook_number)}
-end
-	fanpages = Fanpage.all
-20.times do 
-	fanpages.each{
-	 |fanpage| 
-	 	content = Faker::Lorem.sentence(10)
-		share_count = Faker::Number.number(3)
-		like_count = Faker::Number.number(3)
-		comment_count = Faker::Number.number(3)
-		facebook_id = Faker::Number.number(4)
-		created_at = Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today)
-	  fanpage.posts.create(content: content, share_count: share_count, like_count: like_count, comment_count: comment_count, facebook_id: facebook_id, created_at: created_at)}
+{
+	'15704546335'    => 'Fox News',
+	'18468761129'    => 'Huffington Post',
+  '7331091005'     => 'Bleacher Report',
+  '5550296508'     => 'CNN Breaking News',
+	'228735667216'   => 'BBC World News',
+	'5281959998'     => 'New York Times',
+	'86680728811'    => 'ABC News',
+	'155869377766434'=> 'NBC News'
+}.each do |key, value|
+	Fanpage.create(facebook_number: key, name: value, category: Category.all.sample)
 end
