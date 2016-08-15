@@ -1,0 +1,1 @@
+json.partial! "fb_tokens/fb_token", fb_token: @fb_token

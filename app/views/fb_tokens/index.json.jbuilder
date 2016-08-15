@@ -1,0 +1,1 @@
+json.array! @fb_tokens, partial: 'fb_tokens/fb_token', as: :fb_token
