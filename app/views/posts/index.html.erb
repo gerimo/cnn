@@ -4,8 +4,8 @@
 <table class="table table-striped post-table">
   <thead>
     <tr class="header">
-      <th><%= sortable "facebook_id" %></th>
-      <th>Content</th>
+      <th> Facebook Id </th>
+      <!-- <th>Content</th> -->
       <th><%= sortable "share_count" %></th>
       <th><%= sortable "like_count" %></th>
       <th><%= sortable "comment_count" %> </th>
@@ -15,8 +15,9 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.facebook_id %></td>
-        <td><%= post.content.try(:truncate, 50) %></td>
+        <% page_id, post_id = post.facebook_id.split('_') %>
+        <td><%= link_to post.facebook_id, "https://www.facebook.com/#{page_id}/posts/#{post_id}", target: '_blank' %></td>
+        <!-- <td><%#= post.content.try(:truncate, 50) %></td> -->
         <td><%= post.share_count %></td>
         <td><%= post.like_count %></td>
         <td><%= post.comment_count %></td>

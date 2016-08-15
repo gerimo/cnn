@@ -24,4 +24,29 @@ class PostAnalyzeService
       end
     end
   end
+
+  def perform_first_time
+    @page = Fanpage.where(facebook_number: @fb_page_id).first
+    @graph = Koala::Facebook::API.new(@token)
+    @posts = @graph.get_connections(@fb_page_id, "feed",
+      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 100 })
+    while (true) do
+      @posts.each do |p|
+        begin
+          post = Post.where(facebook_id: p['id']).first
+          post ||= Post.create!(fanpage: @page,
+            facebook_id: p['id'].to_s,
+            fb_created_time: p['created_time'])
+          post.update_attributes(share_count: p['shares'].try(:[], 'count').to_i,
+            like_count: p['likes']['summary']['total_count'],
+            comment_count: p['comments']['summary']['total_count'])
+        rescue Exception => e
+          binding.pry
+          break
+        end
+      end
+      @posts = @posts.next_page
+      break unless @posts.present?
+    end
+  end
 end

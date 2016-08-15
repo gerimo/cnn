@@ -28,4 +28,4 @@ end
 @fb_page_id = '15704546335'
 @token = 'EAACEdEose0cBAKpx8ZBbF4gZAQB3iDxkZCl3VRlEfGtCmxPwDcprVttK8aAr61VQ6fZAr5aeRnmqavKMVONLwQm34wXOHKZATQi7rgWP9pzeVs1YE08XeeSFDrLlXFCxZAz7EZAOokZBJgZCGW2X9bMRAB2Q6CyMXlsuSc8KCXVPglQZDZD'
 s= PostAnalyzeService.new(@fb_page_id, @token)
-s.perform
+s.perform_first_time
