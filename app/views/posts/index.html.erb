@@ -1,25 +1,26 @@
 <p id="notice"><%= notice %></p>
 <h1>Posts</h1>
+<!-- <p>There are <%#= Post.count %> posts.</p> -->
 <table class="table table-striped post-table">
   <thead>
     <tr class="header">
       <th><%= sortable "facebook_id" %></th>
-      <th><%= sortable "content" %></th>
+      <th>Content</th>
       <th><%= sortable "share_count" %></th>
       <th><%= sortable "like_count" %></th>
       <th><%= sortable "comment_count" %> </th>
-      <th><%= sortable "created_at" %> </th>
+      <th><%= sortable "fb_created_time" %> </th>
     </tr>
   </thead>
   <tbody>
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.facebook_id %></td>
-        <td><%= post.content %></td>
+        <td><%= post.content.try(:truncate, 50) %></td>
         <td><%= post.share_count %></td>
         <td><%= post.like_count %></td>
         <td><%= post.comment_count %></td>
-        <td><%= post.created_at %></td>
+        <td><%= post.fb_created_time %></td>
       </tr>
     <% end %>
   </tbody>

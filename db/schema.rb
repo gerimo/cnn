@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813064720) do
+ActiveRecord::Schema.define(version: 20160815181901) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -28,14 +28,15 @@ ActiveRecord::Schema.define(version: 20160813064720) do
   end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "facebook_id"
-    t.string   "content"
+    t.string   "facebook_id"
+    t.text     "content",         limit: 65535
     t.integer  "share_count"
     t.integer  "like_count"
     t.integer  "comment_count"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "fanpage_id"
+    t.datetime "fb_created_time"
     t.index ["fanpage_id"], name: "index_posts_on_fanpage_id", using: :btree
   end
 
