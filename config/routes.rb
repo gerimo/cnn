@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :fb_tokens
   resources :categories
   resources :posts
   resources :fanpages

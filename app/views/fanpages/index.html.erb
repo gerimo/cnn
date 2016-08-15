@@ -7,6 +7,7 @@
       <th><%= sortable "facebook_number" %></th>
       <th><%= sortable "category_id" %></th>
       <th><%= sortable "created_at" %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
         <td><%= fanpage.facebook_number %></td>
         <td><%= fanpage.category.try(:name) %></td>
         <td><%= fanpage.created_at %></td>
+        <td><%= link_to 'Edit', edit_fanpage_path(fanpage) %></td>
       </tr>
     <% end %>
   </tbody>

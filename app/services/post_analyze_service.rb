@@ -19,7 +19,6 @@ class PostAnalyzeService
           like_count: p['likes']['summary']['total_count'],
           comment_count: p['comments']['summary']['total_count'])
       rescue Exception => e
-        binding.pry
         break
       end
     end
@@ -41,7 +40,6 @@ class PostAnalyzeService
             like_count: p['likes']['summary']['total_count'],
             comment_count: p['comments']['summary']['total_count'])
         rescue Exception => e
-          binding.pry
           break
         end
       end
