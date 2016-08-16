@@ -18,7 +18,7 @@
 # end
 
 every :hour do
-  runner "Fanpage.hourly_update"
+  rake "db:hourly_update"
 end
 
 # Learn more: http://github.com/javan/whenever
