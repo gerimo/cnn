@@ -5,7 +5,7 @@
   <thead>
     <tr class="header">
       <th> Facebook Id </th>
-      <!-- <th>Content</th> -->
+      <th>Page</th>
       <th><%= sortable "share_count" %></th>
       <th><%= sortable "like_count" %></th>
       <th><%= sortable "comment_count" %> </th>
@@ -17,7 +17,7 @@
       <tr>
         <% page_id, post_id = post.facebook_id.split('_') %>
         <td><%= link_to post.facebook_id, "https://www.facebook.com/#{page_id}/posts/#{post_id}", target: '_blank' %></td>
-        <!-- <td><%#= post.content.try(:truncate, 50) %></td> -->
+        <td><%= post.fanpage.name %></td>
         <td><%= post.share_count %></td>
         <td><%= post.like_count %></td>
         <td><%= post.comment_count %></td>
