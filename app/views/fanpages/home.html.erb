@@ -1,16 +1,17 @@
 <div class="homepage">
+	
 	<h1>Search for your Competitors Facebook Post </h1>
-
 	<p>Sort posts from different Fan Page regarding their number LIKES SHARES or COMMENTS </p>
+	<br/>
 	<%= form_tag posts_path,method: 'get' do |f| %>
 		<div class="form-choose">
 			<div class="date-choose col-xs-12">
 				<div class="row">
-					<div class="form-group date-from col-xs-5 datepicker">
-			  		<input name="date_from" class ="form-control from" />
+					<div class="form-group date-from col-xs-4 datepicker">
+			  		<input name="date_from" class ="form-control from" placeholder="From date" />
 					</div>
-					<div class="form-group date-end col-xs-5 datepicker">
-			  		<input name="date_end" class ="form-control to" />
+					<div class="form-group date-end col-xs-4 datepicker">
+			  		<input name="date_end" class ="form-control to" placeholder="To date" />
 					</div>	
 				</div>
 			</div>
