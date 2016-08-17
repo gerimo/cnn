@@ -7,7 +7,7 @@ class Fanpage < ApplicationRecord
   end
 
   def self.hourly_update
-    Fanpage.all.each do |fanpage|
+    Fanpage.order('created_at desc').each do |fanpage|
       @token = FbToken.order(created_at: :desc).first.try(:token)
       if fanpage.facebook_number.present? && @token.present?
         if fanpage.posts.count < 500

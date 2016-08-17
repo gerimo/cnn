@@ -9,13 +9,13 @@
 # Category.destroy_all
 # Fanpage.destroy_all
 
-%w[News US Technology Business Movies Sports].each do |name|
-	category = Category.create(name: name)
-end
+# %w[News US Technology Business Movies Sports].each do |name|
+# 	category = Category.create(name: name)
+# end
 
 require 'csv'
 CSV.parse(File.open("#{Rails.root}/db/tables.csv", "r:ISO-8859-1"), :headers => true) do |row|
-  Fanpage.create(name: row[1], facebook_number: row[2], category_id: row[3].to_i - 1)
+  Fanpage.create!(name: row[1], facebook_number: row[2], category_id: row[3].to_i) if row[3].to_i == 1
 end
 
 # {
