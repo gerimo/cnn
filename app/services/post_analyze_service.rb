@@ -8,7 +8,7 @@ class PostAnalyzeService
     @page = Fanpage.where(facebook_number: @fb_page_id).first
     @graph = Koala::Facebook::API.new(@token)
     posts = @graph.get_connections(@fb_page_id, "feed",
-      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 80 })
+      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 100 })
     posts.each do |p|
       begin
         post = Post.where(facebook_id: p['id']).first
@@ -31,7 +31,7 @@ class PostAnalyzeService
       { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 500 })
     while (true) do
       break unless @posts.present?
-      break if @page.posts.count > 500
+      break if @page.posts.count > 1000
       @posts.each do |p|
         begin
           post = Post.where(facebook_id: p['id']).first
