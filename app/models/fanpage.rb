@@ -8,7 +8,8 @@ class Fanpage < ApplicationRecord
 
   def self.hourly_update
     Fanpage.all.each do |fanpage|
-      if @token = FbToken.order(created_at: :desc).first.try(:token)
+      @token = FbToken.order(created_at: :desc).first.try(:token)
+      if fanpage.facebook_number.present? && @token.present?
         if fanpage.posts.count < 500
           PostAnalyzeService.new(fanpage.facebook_number, @token).perform_first_time
         else

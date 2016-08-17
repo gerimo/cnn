@@ -2,7 +2,7 @@
 
 <p>
   <strong>Token:</strong>
-  <%= @fb_token.token %>
+  <%= @fb_token.token.truncate(100) %>
 </p>
 
 <%= link_to 'Edit', edit_fb_token_path(@fb_token) %> |
