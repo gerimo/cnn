@@ -10,6 +10,7 @@
       <th><%= sortable "like_count" %></th>
       <th><%= sortable "comment_count" %> </th>
       <th><%= sortable "fb_created_time" %> </th>
+      <th><%= sortable "updated_at", 'Last update' %> </th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
         <td><%= post.like_count %></td>
         <td><%= post.comment_count %></td>
         <td><%= post.fb_created_time %></td>
+        <td><%= post.updated_at %></td>
       </tr>
     <% end %>
   </tbody>
