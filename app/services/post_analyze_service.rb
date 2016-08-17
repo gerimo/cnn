@@ -8,7 +8,7 @@ class PostAnalyzeService
     @page = Fanpage.where(facebook_number: @fb_page_id).first
     @graph = Koala::Facebook::API.new(@token)
     posts = @graph.get_connections(@fb_page_id, "feed",
-      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 500 })
+      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 80 })
     posts.each do |p|
       begin
         post = Post.where(facebook_id: p['id']).first
@@ -28,7 +28,7 @@ class PostAnalyzeService
     @page = Fanpage.where(facebook_number: @fb_page_id).first
     @graph = Koala::Facebook::API.new(@token)
     @posts = @graph.get_connections(@fb_page_id, "feed",
-      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 100 })
+      { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 500 })
     while (true) do
       @posts.each do |p|
         begin
