@@ -30,6 +30,8 @@ class PostAnalyzeService
     @posts = @graph.get_connections(@fb_page_id, "feed",
       { fields: %w[id shares likes.summary(1).limit(1) comments.summary(1).limit(1)], limit: 500 })
     while (true) do
+      break unless @posts.present?
+      break if @page.posts.count > 500
       @posts.each do |p|
         begin
           post = Post.where(facebook_id: p['id']).first
@@ -44,8 +46,6 @@ class PostAnalyzeService
         end
       end
       @posts = @posts.next_page
-      break unless @posts.present?
-      break if @page.posts.count > 500
     end
   end
 end
