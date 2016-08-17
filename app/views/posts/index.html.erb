@@ -18,7 +18,7 @@
       <tr>
         <% page_id, post_id = post.facebook_id.split('_') %>
         <td><%= link_to post.facebook_id, "https://www.facebook.com/#{page_id}/posts/#{post_id}", target: '_blank' %></td>
-        <td><%= post.fanpage.name %></td>
+        <td><%= link_to post.fanpage.name, posts_path(fanpage_id: post.fanpage_id), target: '_blank' %></td>
         <td><%= post.share_count %></td>
         <td><%= post.like_count %></td>
         <td><%= post.comment_count %></td>
