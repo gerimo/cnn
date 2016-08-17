@@ -45,6 +45,7 @@ class PostAnalyzeService
       end
       @posts = @posts.next_page
       break unless @posts.present?
+      break if @page.posts.count > 500
     end
   end
 end
