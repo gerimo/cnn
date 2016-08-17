@@ -13,7 +13,7 @@
   <tbody>
     <% @fanpages.each do |fanpage| %>
       <tr>
-        <td><%= fanpage.name %></td>
+        <td><%= link_to fanpage.name, posts_path(fanpage_id: fanpage.id), target: '_blank' %></td>
         <td><%= fanpage.facebook_number %></td>
         <td><%= fanpage.category.try(:name) %></td>
         <td><%= fanpage.created_at %></td>

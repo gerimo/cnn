@@ -2,19 +2,18 @@
 
 <h1>Fb Tokens</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Token</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @fb_tokens.each do |fb_token| %>
       <tr>
-        <td><%= fb_token.token %></td>
-        <td><%= link_to 'Show', fb_token %></td>
+        <td><%= fb_token.token.truncate(100) %></td>
         <td><%= link_to 'Edit', edit_fb_token_path(fb_token) %></td>
         <td><%= link_to 'Destroy', fb_token, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

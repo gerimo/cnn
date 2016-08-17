@@ -19,7 +19,8 @@ end
 	Fanpage.create(facebook_number: key, name: value, category: Category.all.sample)
 end
 
-# @fb_page_id = '15704546335'
-# @token = 'EAACEdEose0cBAKpx8ZBbF4gZAQB3iDxkZCl3VRlEfGtCmxPwDcprVttK8aAr61VQ6fZAr5aeRnmqavKMVONLwQm34wXOHKZATQi7rgWP9pzeVs1YE08XeeSFDrLlXFCxZAz7EZAOokZBJgZCGW2X9bMRAB2Q6CyMXlsuSc8KCXVPglQZDZD'
+# @fb_page_id = '228735667216'
+# @token = 'EAACEdEose0cBALz544cNLkv1olb4dDAkqhQruqidCnEg4lXheJ7XktpWPLV765FzBVbiQL09wvOqvcuZBLcXM8KsjD5hTh9mgAo4LEfPB3nJvL0Jk43LoGnYitzlMx6xtT5KJiW0MdLEWG1kXgtipdC9lHFA6rdewGbV0nAZDZD'
 # s= PostAnalyzeService.new(@fb_page_id, @token)
 # s.perform_first_time
+https://graph.facebook.com/oauth/access_token?%20client_id=499835456820667&%20client_secret=APP_SECRET&%20grant_type=fb_exchange_token&%20fb_exchange_token=EXISTING_ACCESS_TOKEN
