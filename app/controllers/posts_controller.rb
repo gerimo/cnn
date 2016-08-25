@@ -12,7 +12,7 @@ class PostsController < ApplicationController
         @fanpages = Fanpage.where(category_id: params[:category_id])
         datef = Date.parse params[:date_from]
         datee = Date.parse params[:date_end]
-        @posts = Post.where("fb_created_time >= ?", datef).where("fb_created_time =< ?", datee).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+        @posts = Post.where("fb_created_time >= ?", datef).where("fb_created_time <= ?", datee).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
       elsif params[:date_from].present? && params[:category_id].present?
         @fanpages = Fanpage.where(category_id: params[:category_id])
         datef = Date.parse params[:date_from]
@@ -20,11 +20,11 @@ class PostsController < ApplicationController
       elsif params[:date_end].present? && params[:category_id].present?
         @fanpages = Fanpage.where(category_id: params[:category_id])
         datee = Date.parse params[:date_end]
-        @posts = Post.where("fb_created_time =< ?", datee).where("fb_created_time < ?", datee).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+        @posts = Post.where("fb_created_time <= ?", datee).where("fb_created_time <= ?", datee).where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
       elsif params[:date_from].present? && params[:date_end].present?
         datef = Date.parse params[:date_from]
         datee = Date.parse params[:date_end]
-        @posts = Post.where("fb_created_time >= ?", datef).where("fb_created_time =< ?", datee).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
+        @posts = Post.where("fb_created_time >= ?", datef).where("fb_created_time <= ?", datee).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
       elsif params[:category_id].present?
         @fanpages = Fanpage.where(category_id: params[:category_id])
         @posts = Post.where("fanpage_id IN (?)", @fanpages.each do |fanpage| fanpage.id end).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 50)
