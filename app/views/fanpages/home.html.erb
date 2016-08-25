@@ -19,7 +19,7 @@
 			<div class="category-choose col-xs-12">
 				<div class="form-group col-xs-4 pd-left">
 			    <label for="sel1">Select Category:</label>
-			    <%= select_tag "category_id", options_for_select(@categorys.collect{ |u| [u.name, u.id]}) ,class: "form-control", id: "sel1" %>
+			    <%= select_tag "category_id", options_for_select(@categorys.collect{ |u| [u.name, u.id]}) ,class: "form-control", id: "sel1", include_blank: 'All categories' %>
 			  </div>
 			</div>
 			<div class="sort-by col-xs-12">
